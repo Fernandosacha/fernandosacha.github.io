@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.4";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.5";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -28,6 +28,7 @@ var originante = "None"
 var receptor = "None"
 var monto = "None"
 
+var readerenabledflag = false
 var p1Card = "04:35:77:fa:c2:55:80"
 var p2Card = "02:e4:4e:ba"
 var p3Card = "None"
@@ -45,6 +46,7 @@ console.log('Autenticando a quien paga');
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readerenabledflag = true
     readTag();
     //pasamos a paso 8 (Monto a pagar)
    stepincourse = 16;
@@ -57,7 +59,9 @@ console.log('Autenticando a quien recibe el premio');
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readerenabledflag = true
     readTag();
+    
     stepincourse = 18;
 };
 
@@ -81,7 +85,8 @@ case 1:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
-    readTag();
+   readerenabledflag = true 
+   readTag();
    //seteamos todo lo que ya sabemos
    receptor = "Banco"
    //pasamos a paso 8 (Monto a pagar)
@@ -95,6 +100,7 @@ case 2:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+   readerenabledflag = true
     readTag();
    //seteamos todo lo que ya sabemos
    originante = "Banco"
@@ -108,6 +114,7 @@ case 3:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readerenabledflag = true
     readTag();
    //pasamos a paso 12 (Monto a cobrar)
    stepincourse = 12;
@@ -118,6 +125,7 @@ case 4:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readerenabledflag = true
     readTag();
    //pasamos a paso 5 (mostrar saldo)
    stepincourse = 5; 
@@ -253,6 +261,7 @@ case 13:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readerenabledflag = true
     readTag();
    //pasamos a paso 12 (Monto a cobrar)
    stepincourse = 14;
@@ -540,6 +549,7 @@ async function readTag() {
       await reader.scan();
       status("Reading tag...");
       reader.onreading = event => {
+        if (readerenabledflag){
         status("Decroded tag data...");
         serialNumber = event.serialNumber
         status("Serial Number:  " + serialNumber);
@@ -552,6 +562,7 @@ async function readTag() {
         if (p6Card === serialNumber) {originante = 6;receptor = 6;console.log("logueado player6");};
         if (p7Card === serialNumber) {originante = 7;receptor = 7;console.log("logueado player7");};
         if (p8Card === serialNumber) {originante = 8;receptor = 8;console.log("logueado player8");};
+        readerenabledflag = false;
         document.getElementById('clickautent').click();
         const decoder = new TextDecoder();
        //consoleLog("Record type:  " + record.recordType);
@@ -559,6 +570,7 @@ async function readTag() {
           //consoleLog("=== data ===\n" + decoder.decode(record.data));
        // }
       }
+      } 
     } catch (error) {
       status("ERROR on reader - " + error);
       consoleLog(error);
@@ -875,4 +887,3 @@ if ( tecl == "1" || tecl == "2" || tecl == "3" || tecl == "4" || tecl == "5" || 
 //funcion de cambiar Alias: Crear ventana y proceso.
 
 //Funcionamiento NFC: Probar y activar funciones automaticas
-
