@@ -29,7 +29,8 @@ var receptor = "None"
 var monto = "None"
 var originantebkp = "None"
 
-var readerenabledflag = false
+var readerenabledflag = false;
+
 var p1Card = "None"
 var p2Card = "None"
 var p3Card = "None"
@@ -234,7 +235,7 @@ case 10:
 case 12:
     //ventana intermedia para evitar doble autenticación
     originantebkp = originante
-    var nombrePj = ConsultaAlias(originante);
+    var nombrePj = ConsultaAlias(originantebkp);
     document.getElementById("fastpopupcart").innerHTML = "Hola "+nombrePj+". A continuación se deberá acercar la tarjeta de quien RECIBIRÁ el dinero.";
     document.getElementById('SalirBtnAuth').click();
     var t = document.getElementById("ventana-flash");
