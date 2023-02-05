@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.9";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.0";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -178,10 +178,11 @@ case 9:
     
       console.log('Pago Exitoso');
       sald = ConsultaSaldo(originante);
+      var nombrePj = ConsultaAlias(receptor);
       document.getElementById('SalirBTNkeyb').click();
       document.getElementById('displayamount').innerHTML = "0";
       document.getElementById("ResultadoTitulo").innerHTML = "OPERACION REALIZADA.";
-      document.getElementById("Resultadodetalle").innerHTML = monto+"$ pagados correctamente. Su saldo ahora es de $: "+sald;
+      document.getElementById("Resultadodetalle").innerHTML = nombrePj + ", $" + monto + " fueron pagados correctamente. Su saldo ahora es de $: "+sald;
       var d = document.getElementById("ventana-resultado");
       $(".overlay-app").addClass("is-active");
       d.classList.add("visible");
