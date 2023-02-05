@@ -542,16 +542,17 @@ async function readTag() {
       reader.onreading = event => {
         status("Decoded tag data...");
         const decoder = new TextDecoder();
-        consoleLog("Serial Number:  " + serialNumber);
-        if (p1Card === serialNumber) {originante = 1;receptor = 1;};
-        if (p2Card === serialNumber) {originante = 2;receptor = 2;};   
-        if (p3Card === serialNumber) {originante = 3;receptor = 3;};
-        if (p4Card === serialNumber) {originante = 4;receptor = 4;};       
-        if (p5Card === serialNumber) {originante = 5;receptor = 5;};
-        if (p6Card === serialNumber) {originante = 6;receptor = 6;};
-        if (p7Card === serialNumber) {originante = 7;receptor = 7;};
-        if (p8Card === serialNumber) {originante = 8;receptor = 8;};
-        op_launcher('99');
+        console.log("Serial Number:  " + serialNumber);
+        console.log("Serial Number:  " + p1Card);
+        if (p1Card === serialNumber) {originante = 1;receptor = 1;console.log("logueado player1");};
+        if (p2Card === serialNumber) {originante = 2;receptor = 2;console.log("logueado player2");};   
+        if (p3Card === serialNumber) {originante = 3;receptor = 3;console.log("logueado player3");};
+        if (p4Card === serialNumber) {originante = 4;receptor = 4;console.log("logueado player4");};       
+        if (p5Card === serialNumber) {originante = 5;receptor = 5;console.log("logueado player5");};
+        if (p6Card === serialNumber) {originante = 6;receptor = 6;console.log("logueado player6");};
+        if (p7Card === serialNumber) {originante = 7;receptor = 7;console.log("logueado player7");};
+        if (p8Card === serialNumber) {originante = 8;receptor = 8;console.log("logueado player8");};
+        document.getElementById('clickautent').click();
        //consoleLog("Record type:  " + record.recordType);
          // consoleLog("MIME type:    " + record.mediaType);
           //consoleLog("=== data ===\n" + decoder.decode(record.data));
@@ -875,4 +876,3 @@ if ( tecl == "1" || tecl == "2" || tecl == "3" || tecl == "4" || tecl == "5" || 
 //funcion de cambiar Alias: Crear ventana y proceso.
 
 //Funcionamiento NFC: Probar y activar funciones automaticas
-
