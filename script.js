@@ -28,6 +28,15 @@ var originante = "None"
 var receptor = "None"
 var monto = "None"
 
+var p1Card = "None"
+var p2Card = "None"
+var p3Card = "None"
+var p4Card = "None"
+var p5Card = "None"
+var p6Card = "None"
+var p7Card = "None"
+var p8Card = "None"
+
 function park_pay() {
 console.log('Autenticando a quien paga');
     document.getElementById('SalirBtnp').click();
@@ -534,14 +543,22 @@ async function readTag() {
         status("Decoded tag data...");
         const decoder = new TextDecoder();
         consoleLog("Serial Number:  " + serialNumber);
-        //for (const record of event.message.records) {
-          //consoleLog("Record type:  " + record.recordType);
+        if (p1Card === serialNumber) {originante = 1;receptor = 1;};
+        if (p2Card === serialNumber) {originante = 2;receptor = 2;};   
+        if (p3Card === serialNumber) {originante = 3;receptor = 3;};
+        if (p4Card === serialNumber) {originante = 4;receptor = 4;};       
+        if (p5Card === serialNumber) {originante = 5;receptor = 5;};
+        if (p6Card === serialNumber) {originante = 6;receptor = 6;};
+        if (p7Card === serialNumber) {originante = 7;receptor = 7;};
+        if (p8Card === serialNumber) {originante = 8;receptor = 8;};
+        op_launcher('99');
+       //consoleLog("Record type:  " + record.recordType);
          // consoleLog("MIME type:    " + record.mediaType);
           //consoleLog("=== data ===\n" + decoder.decode(record.data));
        // }
       disabled(true);
       }
- //     disabled(false);
+      disabled(false);
     } catch (error) {
       status("ERROR on reader - " + error);
       consoleLog(error);
