@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.8";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.9";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -534,7 +534,7 @@ async function readTag() {
         if (readerenabledflag){
         status("Decroded tag data...");
         serialNumberc = event.serialNumber
-        status("Serial Number:  " + serialNumber);
+        status("Serial Number:  " + serialNumberc);
         if (p1Card === serialNumberc) {originante = 1;receptor = 1;window.alert("logueado player1");};
         if (p2Card === serialNumberc) {originante = 2;receptor = 2;window.alert("logueado player2");};   
         if (p3Card === serialNumberc) {originante = 3;receptor = 3;window.alert("logueado player3");};
