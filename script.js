@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v1";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -557,9 +557,7 @@ async function readTag() {
          // consoleLog("MIME type:    " + record.mediaType);
           //consoleLog("=== data ===\n" + decoder.decode(record.data));
        // }
-      disabled(true);
       }
-      disabled(false);
     } catch (error) {
       status("ERROR on reader - " + error);
       consoleLog(error);
@@ -876,3 +874,4 @@ if ( tecl == "1" || tecl == "2" || tecl == "3" || tecl == "4" || tecl == "5" || 
 //funcion de cambiar Alias: Crear ventana y proceso.
 
 //Funcionamiento NFC: Probar y activar funciones automaticas
+
