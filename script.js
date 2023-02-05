@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.3";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.4";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -541,7 +541,7 @@ async function readTag() {
       status("Reading tag...");
       reader.onreading = event => {
         status("Decroded tag data...");
-        
+        serialNumber = event.serialNumber
         status("Serial Number:  " + serialNumber);
         status("Serial Number:  " + p1Card);
         if (p1Card === serialNumber) {originante = 1;receptor = 1;console.log("logueado player1");};
