@@ -1,4 +1,6 @@
+/* css general */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
 * {
   outline: none;
   box-sizing: border-box;
@@ -705,7 +707,7 @@ body.light-mode .video-bg:before {
 
 .pop-up {
   position: absolute;
-  padding: 30px 40px;
+  padding: 10px 10px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -740,7 +742,6 @@ body.light-mode .video-bg:before {
 }
 .pop-up__subtitle {
   white-space: normal;
-  margin: 20px 0;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.8em;
@@ -881,4 +882,131 @@ body.light-mode .video-bg:before {
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-bg);
   border-radius: 10px;
+}
+
+/* FIN de CSS general */
+/* CSS Teclado numerico */
+.calc {
+  background: #ffffff;
+  margin: auto;
+  position: relative;
+  height: 20em;
+  width: 20em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 40px 0px rgba(0, 0, 0, 0.3);
+}
+
+.calc-display {
+  background: #ffffff;
+  color: #000;
+  font-size: 2.5em;
+  padding: 0.5em 0.75em;
+  text-align: right;
+}
+
+.calc-key {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.calc-key > * {
+  padding: 1.25em 1.25em;
+  position: relative;
+  text-align: center;
+}
+
+.calc-key > *:active::before,
+.calc-key > .is-depressed::before {
+  background: #8EC5FC;
+  content: "";
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  opacity: 0.3;
+  position: absolute;
+  z-index: 1;
+}
+
+button {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  outline: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  text-align: left;
+}
+
+button:hover,
+button:active,
+button:focus {
+  outline: none;
+}
+
+.key-nop {
+  background: #eee;
+  font-size: 0.25em;
+  padding: 0.5em;
+}
+
+.key-equ {
+  background: #333;
+  color: #ffffff;
+  grid-column: -2;
+  grid-row: 2/span 4;
+  font-size: 1.25em;
+}
+
+.themer {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  max-width: 10em;
+}
+
+.switch {
+  padding: 1.1em;
+  border-radius: 50%;
+}
+
+/* FINAL CSS Teclado numerico */
+table {
+  font-family: "Open Sans", sans-serif;
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 0.25em;
+  display: block;
+  overflow-y: scroll;
+  max-height: 400px;
+}
+
+th {
+  border-bottom: 1px solid #364043;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+td {
+  font-weight: 400;
+  font-size: 0.85em;
+  padding: 0.65em 1em;
+}
+
+tbody tr {
+  transition: background 0.25s ease;
+}
+
+tbody tr:hover {
+  background: gray;
 }
