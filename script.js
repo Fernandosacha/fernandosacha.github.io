@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.5";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.7";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -29,14 +29,14 @@ var receptor = "None"
 var monto = "None"
 
 var readerenabledflag = false
-var p1Card = "04:35:77:fa:c2:55:80"
-var p2Card = "02:e4:4e:ba"
+var p1Card = "None"
+var p2Card = "None"
 var p3Card = "None"
-var p4Card = "None"
+var p4Card = "04:35:77:fa:c2:55:80"
 var p5Card = "None"
 var p6Card = "None"
 var p7Card = "None"
-var p8Card = "None"
+var p8Card = "02:e4:4e:ba"
 
 function park_pay() {
 console.log('Autenticando a quien paga');
