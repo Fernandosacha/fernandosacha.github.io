@@ -533,6 +533,7 @@ async function readTag() {
       reader.onreading = event => {
         status("Decoded tag data...");
         const decoder = new TextDecoder();
+        consoleLog("Serial Number:  " + event.serialNumber);
         for (const record of event.message.records) {
           consoleLog("Record type:  " + record.recordType);
           consoleLog("MIME type:    " + record.mediaType);
