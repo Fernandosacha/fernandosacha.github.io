@@ -542,8 +542,8 @@ async function readTag() {
       reader.onreading = event => {
         status("Decoded tag data...");
         const decoder = new TextDecoder();
-        console.log("Serial Number:  " + serialNumber);
-        console.log("Serial Number:  " + p1Card);
+        alert("Serial Number:  " + serialNumber);
+        alert("Serial Number:  " + p1Card);
         if (p1Card === serialNumber) {originante = 1;receptor = 1;console.log("logueado player1");};
         if (p2Card === serialNumber) {originante = 2;receptor = 2;console.log("logueado player2");};   
         if (p3Card === serialNumber) {originante = 3;receptor = 3;console.log("logueado player3");};
