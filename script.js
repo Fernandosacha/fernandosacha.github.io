@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.7";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.8";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -27,6 +27,7 @@ var stepincourse = "None"
 var originante = "None"
 var receptor = "None"
 var monto = "None"
+var originantebkp = "None"
 
 var readerenabledflag = false
 var p1Card = "None"
@@ -87,8 +88,6 @@ case 1:
     d.classList.add("visible");
    readerenabledflag = true 
    readTag();
-   //seteamos todo lo que ya sabemos
-   receptor = "Banco"
    //pasamos a paso 8 (Monto a pagar)
    stepincourse = 8;
     break;
@@ -102,8 +101,6 @@ case 2:
     d.classList.add("visible");
    readerenabledflag = true
     readTag();
-   //seteamos todo lo que ya sabemos
-   originante = "Banco"
    //pasamos a paso 10 (Monto a cobrar)
    stepincourse = 10;
     break;
@@ -133,8 +130,6 @@ case 4:
 case 5:
     console.log('Operación de Consulta de Saldo - Mostrar');
     document.getElementById('SalirBtnAuth').click();
-    var e = document.getElementById("playerselector");
-    originante = e.value;
     var nombrePj = ConsultaAlias(originante);
     MostrarBBDDMovJug(nombrePj);
     sald = ConsultaSaldo(originante);
@@ -163,10 +158,7 @@ case 6:
     //Ingresando monto a pagar
     console.log('Step Medio: Monto a Pagar al Banco');
     document.getElementById('SalirBtnAuth').click();
-    var e = document.getElementById("playerselector");
-    originante = e.value;
     var nombrePj = ConsultaAlias(originante);
-    
     document.getElementById("keyboartitl").innerHTML = nombrePj+" por favor ingresá el monto a pagar al Banco.";
     var d = document.getElementById("accion-monto");
     $(".overlay-app").addClass("is-active");
@@ -211,9 +203,6 @@ case 9:
     break;
 case 10:
     //Ingresando monto a cobrar
-    //seteamos todo lo que ya sabemos
-    var e = document.getElementById("playerselector");
-    receptor = e.value;
     var nombrePj = ConsultaAlias(receptor);
     console.log('Step Medio: Monto a Cobrar del Banco');
     document.getElementById('SalirBtnAuth').click();
@@ -244,8 +233,7 @@ case 10:
     break;
 case 12:
     //ventana intermedia para evitar doble autenticación
-    var e = document.getElementById("playerselector");
-    originante = e.value;
+    originantebkp = originante
     var nombrePj = ConsultaAlias(originante);
     document.getElementById("fastpopupcart").innerHTML = "Hola "+nombrePj+". A continuación se deberá acercar la tarjeta de quien RECIBIRÁ el dinero.";
     document.getElementById('SalirBtnAuth').click();
@@ -268,9 +256,7 @@ case 13:
     break;
 case 14:
     console.log('Seleccionar monto transferencia, destino.');
-    var e = document.getElementById("playerselector");
-    receptor = e.value;
-    var nombrePjo = ConsultaAlias(originante);
+    var nombrePjo = ConsultaAlias(originantebkp);
     var nombrePjr = ConsultaAlias(receptor);
     document.getElementById('SalirBtnAuth').click();
     document.getElementById("keyboartitl").innerHTML = nombrePjo+" ingresá el monto a transferir a "+nombrePjr;
@@ -285,13 +271,13 @@ case 15:
    //Realizando Pago
    monto = document.getElementById('displayamount').innerHTML;
    console.log('Step final: Procesando pago...');
-   console.log(originante, "transfiere: ", monto,  "a: ",receptor);
-    var nombrePjo = ConsultaAlias(originante);
+   console.log(originantebkp, "transfiere: ", monto,  "a: ",receptor);
+    var nombrePjo = ConsultaAlias(originantebkp);
     var nombrePjr = ConsultaAlias(receptor); 
-   if (Transferencia(originante, monto, receptor) === true) {
+   if (Transferencia(originantebkp, monto, receptor) === true) {
     
       console.log('Transferencia Exitosa');
-      sald = ConsultaSaldo(originante);
+      sald = ConsultaSaldo(originantebkp);
       document.getElementById('SalirBTNkeyb').click();
       document.getElementById('displayamount').innerHTML = "0";
       document.getElementById("ResultadoTitulo").innerHTML = "TRANSFERENCIA REALIZADA.";
@@ -303,7 +289,7 @@ case 15:
     }else {
      
       console.log('Transferencia fallo');
-      sald = ConsultaSaldo(originante);
+      sald = ConsultaSaldo(originantebkp);
       document.getElementById('SalirBTNkeyb').click();
       document.getElementById('displayamount').innerHTML = "0";
       document.getElementById("ResultadoTitulo").innerHTML = "FALLÓ LA OPERACIÓN.";
@@ -318,8 +304,6 @@ case 15:
     break;
 case 16:
     console.log('Seleccionar monto transferencia de impuesto.');
-    var e = document.getElementById("playerselector");
-    originante = e.value;
     var nombrePjr = ConsultaAlias(originante);
     document.getElementById('SalirBtnAuth').click();
     document.getElementById("keyboartitl").innerHTML = nombrePjr+" ingresá el monto de impuesto a pagar:";
@@ -364,8 +348,6 @@ case 17:
     break;
 case 18:
    //Realizando cobro
-   var e = document.getElementById("playerselector");
-   receptor = e.value;
    originante = '9';
    console.log('Step final: Procesando cobro...');
    var nombrePj = ConsultaAlias(receptor);
@@ -502,7 +484,7 @@ var p5name = document.getElementById("p5name").value;
 var p6name = document.getElementById("p6name").value;
 var p7name = document.getElementById("p7name").value;
 var p8name = document.getElementById("p8name").value;
-console.log(p8name)
+
 if (p1name != '') {TempDecryptDatabase[0][1] = p1name;};
 if (p2name != '') {TempDecryptDatabase[1][1] = p2name;};
 if (p3name != '') {TempDecryptDatabase[2][1] = p3name;};
@@ -551,17 +533,16 @@ async function readTag() {
       reader.onreading = event => {
         if (readerenabledflag){
         status("Decroded tag data...");
-        serialNumber = event.serialNumber
+        serialNumberc = event.serialNumber
         status("Serial Number:  " + serialNumber);
-        status("Serial Number:  " + p1Card);
-        if (p1Card === serialNumber) {originante = 1;receptor = 1;console.log("logueado player1");};
-        if (p2Card === serialNumber) {originante = 2;receptor = 2;console.log("logueado player2");};   
-        if (p3Card === serialNumber) {originante = 3;receptor = 3;console.log("logueado player3");};
-        if (p4Card === serialNumber) {originante = 4;receptor = 4;console.log("logueado player4");};       
-        if (p5Card === serialNumber) {originante = 5;receptor = 5;console.log("logueado player5");};
-        if (p6Card === serialNumber) {originante = 6;receptor = 6;console.log("logueado player6");};
-        if (p7Card === serialNumber) {originante = 7;receptor = 7;console.log("logueado player7");};
-        if (p8Card === serialNumber) {originante = 8;receptor = 8;console.log("logueado player8");};
+        if (p1Card === serialNumberc) {originante = 1;receptor = 1;window.alert("logueado player1");};
+        if (p2Card === serialNumberc) {originante = 2;receptor = 2;window.alert("logueado player2");};   
+        if (p3Card === serialNumberc) {originante = 3;receptor = 3;window.alert("logueado player3");};
+        if (p4Card === serialNumberc) {originante = 4;receptor = 4;window.alert("logueado player4");};       
+        if (p5Card === serialNumberc) {originante = 5;receptor = 5;window.alert("logueado player5");};
+        if (p6Card === serialNumberc) {originante = 6;receptor = 6;window.alert("logueado player6");};
+        if (p7Card === serialNumberc) {originante = 7;receptor = 7;window.alert("logueado player7");};
+        if (p8Card === serialNumberc) {originante = 8;receptor = 8;window.alert("logueado player8");};
         readerenabledflag = false;
         document.getElementById('clickautent').click();
         const decoder = new TextDecoder();
@@ -685,14 +666,14 @@ localStorage.setItem('MDatabase', JSON.stringify(TempDecryptDatabase));
 function IniciarPlayers(initcash) {
 
 var PDatabase =  [
-  ["1", "JOSE", "0000-0001", initcash],
-  ["2", "MARIA", "0000-0002", initcash],
-  ["3", "ROBERTO", "0000-0003", initcash],
-  ["4", "JUAN", "0000-0004", initcash],
-  ["5", "LAURA", "0000-0005", initcash],
-  ["6", "CARLOS", "0000-0006", initcash],
-  ["7", "MANUEL", "0000-0007", initcash],
-  ["8", "ANA", "0000-0008", initcash],
+  ["1", "JOSE", "0001", initcash],
+  ["2", "MARIA", "0002", initcash],
+  ["3", "ROBERTO", "0003", initcash],
+  ["4", "JUAN", "0004", initcash],
+  ["5", "LAURA", "0005", initcash],
+  ["6", "CARLOS", "0006", initcash],
+  ["7", "MANUEL", "0007", initcash],
+  ["8", "ANA", "0008", initcash],
   ["Park", "Parking Cash", "0000-0000", 0]
 ];
   
