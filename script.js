@@ -537,14 +537,14 @@ async function readTag() {
         status("Decroded tag data...");
         serialNumberc = event.serialNumber
         status("Serial Number:  " + serialNumberc);
-        if (p1Card === serialNumberc) {originante = 1;receptor = 1;window.alert("logueado player1");};
-        if (p2Card === serialNumberc) {originante = 2;receptor = 2;window.alert("logueado player2");};   
-        if (p3Card === serialNumberc) {originante = 3;receptor = 3;window.alert("logueado player3");};
-        if (p4Card === serialNumberc) {originante = 4;receptor = 4;window.alert("logueado player4");};       
-        if (p5Card === serialNumberc) {originante = 5;receptor = 5;window.alert("logueado player5");};
-        if (p6Card === serialNumberc) {originante = 6;receptor = 6;window.alert("logueado player6");};
-        if (p7Card === serialNumberc) {originante = 7;receptor = 7;window.alert("logueado player7");};
-        if (p8Card === serialNumberc) {originante = 8;receptor = 8;window.alert("logueado player8");};
+        if (p1Card === serialNumberc) {originante = 1;receptor = 1;console.log("logueado player1");};
+        if (p2Card === serialNumberc) {originante = 2;receptor = 2;console.log("logueado player2");};   
+        if (p3Card === serialNumberc) {originante = 3;receptor = 3;console.log("logueado player3");};
+        if (p4Card === serialNumberc) {originante = 4;receptor = 4;console.log("logueado player4");};       
+        if (p5Card === serialNumberc) {originante = 5;receptor = 5;console.log("logueado player5");};
+        if (p6Card === serialNumberc) {originante = 6;receptor = 6;console.log("logueado player6");};
+        if (p7Card === serialNumberc) {originante = 7;receptor = 7;console.log("logueado player7");};
+        if (p8Card === serialNumberc) {originante = 8;receptor = 8;console.log("logueado player8");};
         readerenabledflag = false;
         document.getElementById('clickautent').click();
         const decoder = new TextDecoder();
