@@ -36,6 +36,7 @@ console.log('Autenticando a quien paga');
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readTag();
     //pasamos a paso 8 (Monto a pagar)
    stepincourse = 16;
 };
@@ -47,6 +48,7 @@ console.log('Autenticando a quien recibe el premio');
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readTag();
     stepincourse = 18;
 };
 
@@ -70,6 +72,7 @@ case 1:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readTag();
    //seteamos todo lo que ya sabemos
    receptor = "Banco"
    //pasamos a paso 8 (Monto a pagar)
@@ -83,6 +86,7 @@ case 2:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readTag();
    //seteamos todo lo que ya sabemos
    originante = "Banco"
    //pasamos a paso 10 (Monto a cobrar)
@@ -95,6 +99,7 @@ case 3:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readTag();
    //pasamos a paso 12 (Monto a cobrar)
    stepincourse = 12;
     break;
@@ -104,6 +109,7 @@ case 4:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readTag();
    //pasamos a paso 5 (mostrar saldo)
    stepincourse = 5; 
     break;
@@ -238,6 +244,7 @@ case 13:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
+    readTag();
    //pasamos a paso 12 (Monto a cobrar)
    stepincourse = 14;
     break;
@@ -849,3 +856,4 @@ if ( tecl == "1" || tecl == "2" || tecl == "3" || tecl == "4" || tecl == "5" || 
 //funcion de cambiar Alias: Crear ventana y proceso.
 
 //Funcionamiento NFC: Probar y activar funciones automaticas
+
