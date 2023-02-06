@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.8";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.9";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -54,7 +54,7 @@ function updateplayerauthlaunchr(Playr)
     var d = document.getElementById("accion-lecturalink");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
-   playercardchange = Playr
+   playercardchange = parseInt(Playr)
    cardlinkcall = true;
    readerenabledflag = true ;
    readTag();
@@ -573,21 +573,20 @@ async function readTag() {
         if (p7Card === serialNumberc) {originante = 7;receptor = 7;console.log("logueado player7");};
         if (p8Card === serialNumberc) {originante = 8;receptor = 8;console.log("logueado player8");};
         readerenabledflag = false;
-        
-        if (cardlinkcall) { 
-         //nos fijamos si el llamado viene de el cambio de tarjeta
-         document.getElementById('clickautentLink').click();
-         codecardchange = event.serialNumber;
-         //Reiniciamos la flag y seguimos el baile 
-        };
         cardlinkcall = false; 
         document.getElementById('clickautent').click();
         const decoder = new TextDecoder();
+        }
+        if (cardlinkcall) { 
+         //nos fijamos si el llamado viene de el cambio de tarjeta
+         codecardchange = event.serialNumber;
+         document.getElementById('clickautentLink').click();
+         //Reiniciamos la flag y seguimos el baile 
+        }
+        
        //consoleLog("Record type:  " + record.recordType);
          // consoleLog("MIME type:    " + record.mediaType);
-          //consoleLog("=== data ===\n" + decoder.decode(record.data));
-       // }
-      }
+          //consoleLog("=== data ===\n" + decoder.decode(record.data));     
       } 
     } catch (error) {
       status("ERROR on reader - " + error);
