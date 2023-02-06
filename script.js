@@ -578,12 +578,10 @@ async function readTag() {
          //nos fijamos si el llamado viene de el cambio de tarjeta
          document.getElementById('clickautentLink').click();
          codecardchange = event.serialNumber;
-         //Reiniciamos la flag y seguimos el baile
-         cardlinkcall = false;
-        }
-         else {
-          document.getElementById('clickautent').click();
-         };        
+         //Reiniciamos la flag y seguimos el baile 
+        };
+        cardlinkcall = false; 
+        document.getElementById('clickautent').click();
         const decoder = new TextDecoder();
        //consoleLog("Record type:  " + record.recordType);
          // consoleLog("MIME type:    " + record.mediaType);
