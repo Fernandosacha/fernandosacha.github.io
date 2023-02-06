@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.0";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.4";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -27,18 +27,45 @@ var stepincourse = "None"
 var originante = "None"
 var receptor = "None"
 var monto = "None"
-var originantebkp = "None"
 
+var originantebkp = "None"
 var readerenabledflag = false;
 
 var p1Card = "None"
 var p2Card = "None"
 var p3Card = "None"
-var p4Card = "04:35:77:fa:c2:55:80"
+var p4Card = "None"
 var p5Card = "None"
 var p6Card = "None"
 var p7Card = "None"
-var p8Card = "02:e4:4e:ba"
+var p8Card = "None"
+
+var playercardchange = "None"
+var codecardchange = "None"
+var cardlinkcall = false
+
+function updateplayerauthlaunchr(Playr)
+{
+//Inicia un pago, se launchea el autenticador
+    guardarnombres();
+    document.getElementById('SalirBtn').click();
+    document.getElementById("actiondetailexp").innerHTML = "Apoye Tarjeta a linkear para PLAYER "+Playr;
+    console.log('linkeando tarjeta...');
+    var d = document.getElementById("accion-lecturalink");
+    $(".overlay-app").addClass("is-active");
+    d.classList.add("visible");
+   playercardchange = Playr
+   cardlinkcall = true;
+   readerenabledflag = true ;
+   readTag();
+   };
+function listocambiocard()
+{
+//hacemos el cambio de tarjeta
+updatePlayerCard(playercardchange, codecardchange);
+//abrimos setup (lo hace la funcion a la que llamamos)
+ 
+}
 
 function park_pay() {
 console.log('Autenticando a quien paga');
@@ -535,7 +562,7 @@ async function readTag() {
       reader.onreading = event => {
         if (readerenabledflag){
         status("Decroded tag data...");
-        serialNumberc = event.serialNumber
+        serialNumberc = event.serialNumber;
         status("Serial Number:  " + serialNumberc);
         if (p1Card === serialNumberc) {originante = 1;receptor = 1;console.log("logueado player1");};
         if (p2Card === serialNumberc) {originante = 2;receptor = 2;console.log("logueado player2");};   
@@ -546,7 +573,17 @@ async function readTag() {
         if (p7Card === serialNumberc) {originante = 7;receptor = 7;console.log("logueado player7");};
         if (p8Card === serialNumberc) {originante = 8;receptor = 8;console.log("logueado player8");};
         readerenabledflag = false;
-        document.getElementById('clickautent').click();
+        
+        if (cardlinkcall) { 
+         //nos fijamos si el llamado viene de el cambio de tarjeta
+         document.getElementById('clickautentLink').click();
+         codecardchange = event.serialNumber;
+         //Reiniciamos la flag y seguimos el baile
+         cardlinkcall = false;
+        }
+         else {
+          document.getElementById('clickautent').click();
+         };        
         const decoder = new TextDecoder();
        //consoleLog("Record type:  " + record.recordType);
          // consoleLog("MIME type:    " + record.mediaType);
@@ -668,17 +705,24 @@ localStorage.setItem('MDatabase', JSON.stringify(TempDecryptDatabase));
 function IniciarPlayers(initcash) {
 
 var PDatabase =  [
-  ["1", "JOSE", "0001", initcash],
-  ["2", "MARIA", "0002", initcash],
-  ["3", "ROBERTO", "0003", initcash],
-  ["4", "JUAN", "0004", initcash],
-  ["5", "LAURA", "0005", initcash],
-  ["6", "CARLOS", "0006", initcash],
-  ["7", "MANUEL", "0007", initcash],
-  ["8", "ANA", "0008", initcash],
+  ["1", "JOSE", "None", initcash],
+  ["2", "MARIA", "None", initcash],
+  ["3", "ROBERTO", "None", initcash],
+  ["4", "JUAN", "None", initcash],
+  ["5", "LAURA", "None", initcash],
+  ["6", "CARLOS", "None", initcash],
+  ["7", "MANUEL", "None", initcash],
+  ["8", "ANA", "None", initcash],
   ["Park", "Parking Cash", "0000-0000", 0]
 ];
-  
+p1Card = "None"
+p2Card = "None"
+p3Card = "None"
+p4Card = "None"
+p5Card = "None"
+p6Card = "None"
+p7Card = "None"
+p8Card = "None"  
 //almacenamiento en LocalStorage de la base
 //creaciòn de tabla dinamiga
 
@@ -842,7 +886,13 @@ var aliases = TempDecryptDatabase[player][1];
 return aliases;
 };
 
-
+function updatePlayerCard(playern, cardID) {
+var player = playern-1;
+var TempDecryptDatabase = JSON.parse(localStorage.getItem('PDatabase'));  
+TempDecryptDatabase[player][2] = cardID;
+localStorage.setItem('PDatabase', JSON.stringify(TempDecryptDatabase));
+SetupMENU();
+};
 
 
 // TECLADO NUMERICO
