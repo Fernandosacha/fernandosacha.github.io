@@ -888,6 +888,15 @@ function updatePlayerCard(playern, cardID) {
 var player = playern-1;
 var TempDecryptDatabase = JSON.parse(localStorage.getItem('PDatabase'));  
 TempDecryptDatabase[player][2] = cardID;
+
+var p1Card = TempDecryptDatabase[0][2]
+var p2Card = TempDecryptDatabase[1][2]
+var p3Card = TempDecryptDatabase[2][2]
+var p4Card = TempDecryptDatabase[3][2]
+var p5Card = TempDecryptDatabase[4][2]
+var p6Card = TempDecryptDatabase[5][2]
+var p7Card = TempDecryptDatabase[6][2]
+var p8Card = TempDecryptDatabase[7][2]
 localStorage.setItem('PDatabase', JSON.stringify(TempDecryptDatabase));
 SetupMENU();
 };
