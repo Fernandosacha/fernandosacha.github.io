@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.4";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.8";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
