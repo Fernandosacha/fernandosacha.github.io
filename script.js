@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.4";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v3.4";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -30,15 +30,6 @@ var monto = "None"
 
 var originantebkp = "None"
 var readerenabledflag = false;
-
-var p1Card = "None"
-var p2Card = "None"
-var p3Card = "None"
-var p4Card = "None"
-var p5Card = "None"
-var p6Card = "None"
-var p7Card = "None"
-var p8Card = "None"
 
 var playercardchange = "None"
 var codecardchange = "None"
@@ -564,20 +555,20 @@ async function readTag() {
         status("Decroded tag data...");
         serialNumberc = event.serialNumber;
         status("Serial Number:  " + serialNumberc);
-        if (p1Card === serialNumberc) {originante = 1;receptor = 1;window.alert("logueado player1");};
-        if (p2Card === serialNumberc) {originante = 2;receptor = 2;window.alert("logueado player2");};   
-        if (p3Card === serialNumberc) {originante = 3;receptor = 3;window.alert("logueado player3");};
-        if (p4Card === serialNumberc) {originante = 4;receptor = 4;window.alert("logueado player4");};       
-        if (p5Card === serialNumberc) {originante = 5;receptor = 5;window.alert("logueado player5");};
-        if (p6Card === serialNumberc) {originante = 6;receptor = 6;window.alert("logueado player6");};
-        if (p7Card === serialNumberc) {originante = 7;receptor = 7;window.alert("logueado player7");};
-        if (p8Card === serialNumberc) {originante = 8;receptor = 8;window.alert("logueado player8");};
-        window.alert("No se encontroplayercoincidente");
-        window.alert("serial number leido:" +serialNumberc)
-        window.alert("serlials grabado:"+p1Card)
+        var TempDecryptDatabase = JSON.parse(localStorage.getItem('PDatabase')); 
+        if (TempDecryptDatabase[0][2] === serialNumberc) {originante = 1;receptor = 1;window.alert("logueado player1");};
+        if (TempDecryptDatabase[1][2] === serialNumberc) {originante = 2;receptor = 2;console.log("logueado player2");};   
+        if (TempDecryptDatabase[2][2] === serialNumberc) {originante = 3;receptor = 3;console.log("logueado player3");};
+        if (TempDecryptDatabase[3][2] === serialNumberc) {originante = 4;receptor = 4;console.log("logueado player4");};       
+        if (TempDecryptDatabase[4][2] === serialNumberc) {originante = 5;receptor = 5;console.log("logueado player5");};
+        if (TempDecryptDatabase[5][2] === serialNumberc) {originante = 6;receptor = 6;console.log("logueado player6");};
+        if (TempDecryptDatabase[6][2] === serialNumberc) {originante = 7;receptor = 7;console.log("logueado player7");};
+        if (TempDecryptDatabase[7][2] === serialNumberc) {originante = 8;receptor = 8;console.log("logueado player8");};
+        window.alert("serlials grabado:"+TempDecryptDatabase[0][2])
         readerenabledflag = false;
         document.getElementById('clickautent').click();
         const decoder = new TextDecoder();
+        
         }
         if (cardlinkcall) { 
          //nos fijamos si el llamado viene de el cambio de tarjeta
@@ -715,14 +706,6 @@ var PDatabase =  [
   ["8", "ANA", "None", initcash],
   ["Park", "Parking Cash", "0000-0000", 0]
 ];
-p1Card = "None"
-p2Card = "None"
-p3Card = "None"
-p4Card = "None"
-p5Card = "None"
-p6Card = "None"
-p7Card = "None"
-p8Card = "None"  
 //almacenamiento en LocalStorage de la base
 //creaciòn de tabla dinamiga
 
@@ -890,15 +873,6 @@ function updatePlayerCard(playern, cardID) {
 var player = playern-1;
 var TempDecryptDatabase = JSON.parse(localStorage.getItem('PDatabase'));  
 TempDecryptDatabase[player][2] = cardID;
-
-var p1Card = TempDecryptDatabase[0][2]
-var p2Card = TempDecryptDatabase[1][2]
-var p3Card = TempDecryptDatabase[2][2]
-var p4Card = TempDecryptDatabase[3][2]
-var p5Card = TempDecryptDatabase[4][2]
-var p6Card = TempDecryptDatabase[5][2]
-var p7Card = TempDecryptDatabase[6][2]
-var p8Card = TempDecryptDatabase[7][2]
 localStorage.setItem('PDatabase', JSON.stringify(TempDecryptDatabase));
 SetupMENU();
 };
