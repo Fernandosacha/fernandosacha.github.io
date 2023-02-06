@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.9";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v3.0";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -49,14 +49,13 @@ function updateplayerauthlaunchr(Playr)
 //Inicia un pago, se launchea el autenticador
     guardarnombres();
     document.getElementById('SalirBtn').click();
-    document.getElementById("actiondetailexp").innerHTML = "Apoye Tarjeta a linkear para PLAYER "+Playr;
+    document.getElementById("actiondetailexplink").innerHTML = "Apoye Tarjeta a linkear para PLAYER "+Playr;
     console.log('linkeando tarjeta...');
     var d = document.getElementById("accion-lecturalink");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
-   playercardchange = parseInt(Playr)
+   playercardchange = Playr
    cardlinkcall = true;
-   readerenabledflag = true ;
    readTag();
    };
 function listocambiocard()
@@ -560,7 +559,8 @@ async function readTag() {
       await reader.scan();
       status("Reading tag...");
       reader.onreading = event => {
-        if (readerenabledflag){
+        if (readerenabledflag)
+        {
         status("Decroded tag data...");
         serialNumberc = event.serialNumber;
         status("Serial Number:  " + serialNumberc);
@@ -573,7 +573,6 @@ async function readTag() {
         if (p7Card === serialNumberc) {originante = 7;receptor = 7;console.log("logueado player7");};
         if (p8Card === serialNumberc) {originante = 8;receptor = 8;console.log("logueado player8");};
         readerenabledflag = false;
-        cardlinkcall = false; 
         document.getElementById('clickautent').click();
         const decoder = new TextDecoder();
         }
@@ -581,6 +580,7 @@ async function readTag() {
          //nos fijamos si el llamado viene de el cambio de tarjeta
          codecardchange = event.serialNumber;
          document.getElementById('clickautentLink').click();
+         cardlinkcall = false;
          //Reiniciamos la flag y seguimos el baile 
         }
         
