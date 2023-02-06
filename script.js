@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v3.4";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.4";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -556,7 +556,7 @@ async function readTag() {
         serialNumberc = event.serialNumber;
         status("Serial Number:  " + serialNumberc);
         var TempDecryptDatabase = JSON.parse(localStorage.getItem('PDatabase')); 
-        if (TempDecryptDatabase[0][2] === serialNumberc) {originante = 1;receptor = 1;window.alert("logueado player1");};
+        if (TempDecryptDatabase[0][2] === serialNumberc) {originante = 1;receptor = 1;console.log("logueado player1");};
         if (TempDecryptDatabase[1][2] === serialNumberc) {originante = 2;receptor = 2;console.log("logueado player2");};   
         if (TempDecryptDatabase[2][2] === serialNumberc) {originante = 3;receptor = 3;console.log("logueado player3");};
         if (TempDecryptDatabase[3][2] === serialNumberc) {originante = 4;receptor = 4;console.log("logueado player4");};       
@@ -564,7 +564,6 @@ async function readTag() {
         if (TempDecryptDatabase[5][2] === serialNumberc) {originante = 6;receptor = 6;console.log("logueado player6");};
         if (TempDecryptDatabase[6][2] === serialNumberc) {originante = 7;receptor = 7;console.log("logueado player7");};
         if (TempDecryptDatabase[7][2] === serialNumberc) {originante = 8;receptor = 8;console.log("logueado player8");};
-        window.alert("serlials grabado:"+TempDecryptDatabase[0][2])
         readerenabledflag = false;
         document.getElementById('clickautent').click();
         const decoder = new TextDecoder();
