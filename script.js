@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v1.4";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.1";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -94,6 +94,10 @@ function op_launcher(step) {
  //si es una operación inicial se cambia la variable global tipoOP porque comienza de cero una nueva acción. 
  stepincourse = parseInt(step);
  }; 
+  if (intsetep = 19) {
+ //si es una operación inicial 19 . agregado funcion "Salida". 
+ stepincourse = parseInt(step);
+ }; 
  // Tipos de autor: 1-Emite 2-Recibe 3-EmiteRequiereOtro 4-Autentica 5-Autentica 6-Emite 
  switch (stepincourse) {
 case 1:
@@ -158,6 +162,7 @@ case 5:
     break;
 case 6:
     console.log('Operación de ver todos los movimientos.');
+    document.getElementById('SalirBtn').click();
     MostrarBBDDMov();
     document.getElementById("titulSaldoyMov").innerHTML = "Todos los Movimientos";
     var t = document.getElementById("movimientos-window");
@@ -377,6 +382,34 @@ case 18:
       document.getElementById('displayamount').innerHTML = "0";
       document.getElementById("ResultadoTitulo").innerHTML = "OPERACION REALIZADA.";
       document.getElementById("Resultadodetalle").innerHTML = nombrePj+", fueron cobrados $"+monto+" del Premio de Parking!. Tu saldo ahora es de $"+sald+".";
+      var d = document.getElementById("ventana-resultado");
+      $(".overlay-app").addClass("is-active");
+      d.classList.add("visible");
+    stepincourse = "None"
+    break;
+case 19:
+    console.log('Operación de pase por salida.');
+    //Inicia un pago, se launchea el autenticador
+    document.getElementById("actiondetailexp").innerHTML = "Apoye la tarjeta de quien pasó por la salida";
+    console.log('Autenticando cobro.');
+    var d = document.getElementById("accion-lectura");
+    $(".overlay-app").addClass("is-active");
+    d.classList.add("visible");
+   readerenabledflag = true;
+    readTag();
+   //pasamos a paso 10 (Monto a cobrar)
+   stepincourse = 20;
+    break;
+case 20:
+   //Realizando cobro
+   monto = '200'
+   console.log('Step final: Procesando cobro Salida..');
+   console.log(receptor, "monto: ", monto)
+   var nombrePj = ConsultaAlias(receptor);
+   CobrodeBanco(receptor,monto)
+      sald = ConsultaSaldo(receptor);
+      document.getElementById("ResultadoTitulo").innerHTML = "OPERACION REALIZADA.";
+      document.getElementById("Resultadodetalle").innerHTML = nombrePj+", cobraste $"+monto+" por pasar por la Salida. Tu saldo ahora es de $"+sald+".";
       var d = document.getElementById("ventana-resultado");
       $(".overlay-app").addClass("is-active");
       d.classList.add("visible");
@@ -894,11 +927,3 @@ if ( tecl == "1" || tecl == "2" || tecl == "3" || tecl == "4" || tecl == "5" || 
 
 // FIN TECLADO NUMERICO
 // FIN FUNCIONES TECLADO NUMERICO
-
-
-// TO-DO
-
-//palabra secreta RESTARTALL para vaciar la LOCAL STORAGE?
-//funcion de cambiar Alias: Crear ventana y proceso.
-
-//Funcionamiento NFC: Probar y activar funciones automaticas
