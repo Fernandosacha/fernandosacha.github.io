@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.1";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.2";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -491,7 +491,7 @@ d.classList.add("visible");
 
 function RestartMenu() {
 document.getElementById('SalirBtn').click();
-document.getElementById('cashinitval').value = '500';
+document.getElementById('cashinitval').value = '1500';
 document.getElementById('securewordinput').value = '';
 document.getElementById('resultReinicio').innerHTML = '';
 var d = document.getElementById("Restart-Game");
