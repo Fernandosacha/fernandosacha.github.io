@@ -17,7 +17,7 @@ function switchFields(e) {
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 
 if (localStorage.getItem("PDatabase") === null) {
-IniciarPlayers(500);
+IniciarPlayers(1500);
 }
 if (localStorage.getItem("MDatabase") === null) {
 SetearBBDDMov();  
