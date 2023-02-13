@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.2";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.3";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -395,7 +395,7 @@ case 19:
     var d = document.getElementById("accion-lectura");
     $(".overlay-app").addClass("is-active");
     d.classList.add("visible");
-   readerenabledflag = true;
+    readerenabledflag = true
     readTag();
    //pasamos a paso 10 (Monto a cobrar)
    stepincourse = 20;
@@ -404,6 +404,7 @@ case 20:
    //Realizando cobro
    monto = '200'
    console.log('Step final: Procesando cobro Salida..');
+   document.getElementById('SalirBtnAuth').click();
    console.log(receptor, "monto: ", monto)
    var nombrePj = ConsultaAlias(receptor);
    CobrodeBanco(receptor,monto)
