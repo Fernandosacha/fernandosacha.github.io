@@ -1,5 +1,5 @@
 // Creando LOCALSTORAGE si no existe
-document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.6";
+document.getElementById('versiondett').innerHTML = "MONOPOLY® v2.1.1";
 //OJO ACA - ESTO ES DE CAMBIADOR DE NOMBRES DE PLAYERS
 $('select').on('change', switchFields);
 
@@ -92,10 +92,6 @@ function op_launcher(step) {
  
  if (intsetep <= 7) {
  //si es una operación inicial se cambia la variable global tipoOP porque comienza de cero una nueva acción. 
- stepincourse = parseInt(step);
- }; 
- if (intsetep == 19) {
- //si es una operación inicial 19 . agregado funcion "Salida". 
  stepincourse = parseInt(step);
  }; 
  // Tipos de autor: 1-Emite 2-Recibe 3-EmiteRequiereOtro 4-Autentica 5-Autentica 6-Emite 
@@ -387,7 +383,7 @@ case 18:
       d.classList.add("visible");
     stepincourse = "None"
     break;
-case 19:
+case 0:
     console.log('Operación de pase por salida.');
     //Inicia un pago, se launchea el autenticador
     document.getElementById("actiondetailexp").innerHTML = "Apoye la tarjeta de quien pasó por la salida";
